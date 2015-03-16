@@ -370,6 +370,22 @@ and its type to another procedure which one will traduce the pattern into the pr
    
    
 \ENDCASE
+
+\CASE {3}
+  \SWITCH {$type$}
+ \CASE {C}
+   \STATE out.write("cooperation")
+        
+\ENDCASE
+\CASELINE {S}
+  \STATE out.write("synchronization")
+\DEFAULT
+ \STATE out.write("unknow pattern")
+ \ENDDEFAULT
+\ENDSWITCH
+   
+   
+\ENDCASE
 %\CASELINE {2}
 %  \STATE Good-bye
 %\DEFAULT
