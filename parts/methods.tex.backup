@@ -7,7 +7,7 @@ The general workflow for integrating time-series data in model is depicted in Fi
 
 \begin{figure*}[!t]
  \centering
- \includegraphics[width=6.5in]{workflow-1.png}
+ \includegraphics[width=6.5in]{images/workflow-1.png}
 \caption{{\bf Work-flow of our method}} 
  \label{fig:workflow}
 \end{figure*}
@@ -51,7 +51,7 @@ We have activation(agent), inhibition, output, input and famillyMemberOf.
 
 \begin{figure*}[!t]
  \centering
- \includegraphics[width=7.5in]{net1.jpeg}
+ \includegraphics[width=7.5in]{images/net1.jpeg}
 \caption{{\bf RSTC network}} 
  \label{fig:network}
 \end{figure*}
@@ -69,7 +69,7 @@ of getting published.
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=2.5in]{12genes.png}
+\includegraphics[width=2.5in]{images/12genes.png}
 \caption{\bf Plot of $12$ selected genes}
 \label{tsd}
 \end{figure}
@@ -355,8 +355,35 @@ and its type to another procedure which one will traduce the pattern into the pr
 \STATE $nocp$ = $Pat$.getNumberOfComponents() \COMMENT{Number of the components of the pattern $Pat$}
 \STATE 
 \SWITCH {$nocp$}
- \CASE {1}
-   \STATE added node to the pattern
+ \CASE {2}
+  \SWITCH {$type$}
+ \CASE {A}
+   \STATE out.write("activation")
+        
+\ENDCASE
+\CASELINE {I}
+  \STATE out.write("inhibition")
+\DEFAULT
+ \STATE out.write("unknow pattern")
+ \ENDDEFAULT
+\ENDSWITCH
+   
+   
+\ENDCASE
+
+\CASE {3}
+  \SWITCH {$type$}
+ \CASE {C}
+   \STATE out.write("cooperation")
+        
+\ENDCASE
+\CASELINE {S}
+  \STATE out.write("synchronization")
+\DEFAULT
+ \STATE out.write("unknow pattern")
+ \ENDDEFAULT
+\ENDSWITCH
+   
    
 \ENDCASE
 %\CASELINE {2}
@@ -626,7 +653,7 @@ of $9$ seleted genes from the times-series data with their respective discrete p
 
 \begin{figure}[!t]
  \centering
- \includegraphics[width=2.5in]{ResultDiscretization.png}
+ \includegraphics[width=2.5in]{images/ResultDiscretization.png}
  % IllustrationDiscretisation.png: 831x574 pixel, 72dpi, 29.32x20.25 cm, bb=0 0 831 574
  \caption{Illustration of discretization of Experiment Data }
  \label{fig:illustrationDiscretisation}

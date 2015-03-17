@@ -317,11 +317,47 @@ and its type to another procedure which one will traduce the pattern into the pr
     \SWITCH {$m$}
     \CASE {TerminalNode}
       \STATE added node to the pattern $Pat$
-      \STATE Set the code of pattern Pat
-      \STATE return $Pat$
     \ENDCASE
+    
+    \CASE {TransientNode}
+      \STATE detectPattern($Net$,$m$);
+    \ENDCASE
+    
     \ENDSWITCH
    \ENDFOR
+      \STATE Set the code of pattern Pat
+      \STATE return $Pat$
+   \ENDCASE
+   
+     % \CASE {2}
+  % \ENDCASE
+  % \DEFAULT
+  %  \STATE \RETURN ERROR CODE \COMMENT{We can't treat this case}
+  % \ENDDEFAULT
+   \ENDSWITCH
+\ENDCASE
+   
+   \CASE{TransientNode} %\COMMENT{We compact many sub case of all terminal nodes}
+   %\STATE added node to the pattern
+   \STATE numberPredecessor= $n$.getNumberOfPredecessor() \COMMENT{To get the number of predecessor of node $n$}
+   \SWITCH{numberPredecessor}
+   
+   \CASE{1}
+    \FORALL {in comming edge (n-m)}
+    \STATE get the node $m$
+    \SWITCH {$m$}
+    \CASE {TerminalNode}
+      \STATE added node to the pattern $Pat$
+    \ENDCASE
+    
+    \CASE {TransientNode}
+      \STATE detectPattern($Net$,$m$);
+    \ENDCASE
+    
+    \ENDSWITCH
+   \ENDFOR
+      \STATE Set the code of pattern Pat
+      \STATE return $Pat$
    \ENDCASE
    
   % \CASE {2}
@@ -359,10 +395,12 @@ and its type to another procedure which one will traduce the pattern into the pr
   \SWITCH {$type$}
  \CASE {A}
    \STATE out.write("activation")
+   \STATE out.write("")
         
 \ENDCASE
 \CASELINE {I}
   \STATE out.write("inhibition")
+  \STATE 
 \DEFAULT
  \STATE out.write("unknow pattern")
  \ENDDEFAULT
