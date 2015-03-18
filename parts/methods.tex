@@ -8,7 +8,7 @@ The general workflow for integrating time-series data and model is depicted in \
 \begin{figure*}[!t]
  \centering
  \includegraphics[width=6.5in]{images/workflow-2.png}
-\caption{{\bf Work-flow for integrating stochastic and temporal informations in large scale network}} 
+\caption{{\bf Workflow for integrating stochastic and temporal informations in large scale biological networks}} 
  \label{fig:workflow}
 \end{figure*}
 
@@ -47,14 +47,14 @@ A \emph{RSTC Network} $N$ is a couple $(V,E)$, where:
 
 In this definition, terminal nodes can be genes, proteins, complexes, cellular state, biological processes and positive condition. 
 On the other side, transient nodes can be transcriptions, translocations, modifications and compounds. Edges are of different types.
-We have activation(agent), inhibition, output, input and famillyMemberOf.
+We have activation (agent), inhibition, output, input and famillyMemberOf.
 
 \begin{figure*}[!t]
  \centering
  \includegraphics[width=7.5in]{images/net.jpg}
-\caption{{\bf RSTC network. It is the interaction graph that describe the biological case study. It is composed of $293$ nodes and $375$ edges(interactions).
-The set of nodes are composed of terminal nodes(proteins, complexes, genes, cellular state,biological processes and positive condition) and of transient
-nodes(transcriptions, compound, translocations, modifications and compounds). The set of edges are composed of activation(agent), inhibition, output, 
+\caption{{\bf RSTC network. It is the interaction graph that describe the biological case study. It is composed of $293$ nodes and $375$ edges (interactions).
+The set of nodes are composed of terminal nodes(proteins, complexes, genes, cellular state, biological processes and positive conditions) and of transient
+nodes (transcriptions, compound, translocations, modifications and compounds). The set of edges are composed of interactions of type activation (agent), inhibition, output, 
 input and famillyMemberOf}} 
  \label{fig:network}
 \end{figure*}
@@ -135,7 +135,7 @@ the notion of synchronization sort, which will implement another type of coopera
 \pref{fig:runningPH}, and asume that $ab$ is our \emph{synchronization sort} between sorts $a$ and $b$, defined with also 
 4 processes. Then, component $c$ will be activated ($c_1$ bounce to $c_2$) if each one of $a$ and $b$ are also activated. So each 
 one of this processes $ab_1$, $ab_2$, $ab_3$ can activate $c_1$. But to be desactived, we need both $a$ and $b$ to be desactived.
-We will see later why it is important to introduce this new rule for the cooperation between componnets.
+We will see later why it is important to introduce this new rule for the cooperation between componnets in our real case study.
 
 \begin{example}
 \pref{fig:runningPH} represents a PH $(\PHs,\PHl,\PHa)$ with $\PHs = \{a,b,c,ab\}$, and:
@@ -246,12 +246,12 @@ Actions targeting processes of $c$ are in thick lines.
 
 
 %la traduction automatique des patterns d'un réseau
-\subsection{From RSTC to PH/Model construction}
+\subsection{Model construction(From RSTC to PH)}
 %In this part we will describe how to go from rstc to ph model
-In this work, we aim to see a biological  model according to his dynamic. For that, we choose to build a formal model from a biological model reprensented as in an RSTC network.
+In this work, we aim to model a biological  system according to his dynamic. For that, we choose to build a PH model from the biological model reprensented as  an RSTC network.
 
 %why we made this choice?
-In the following we'll present our automatic approach to generate au PH model from an RSTC network.
+In the following we present our automatic approach to generate a PH model from an RSTC network.
 
 
 \subsubsection{Modeling the RSTC network as a PH model}
@@ -607,7 +607,7 @@ On the one hand, we consider the probability of a reaction to occur, and on the 
 consider stochastic parameters in the aim at observing an expected behavior. 
 In the PH framework, to play an action we need two essential parameters: the rate $r$ or the temporal parameter because $t=r^{-1}$ if we assume that $t$ is the average time of playing an action
 and the stochasticity absorption $sa$. These two parameters will be estimated according to the expression profile of time-series data of the experiment
-describe in \ref{SECTSD}. 
+described in Section \ref{SECTSD}. 
 
 
 To avoid over fitting in the estimation of these parameters, we propose that each component of the PH, representing a measured gene in the network,  will take the estimated values of the parameters of its respective cluster in the experimental data.

@@ -441,7 +441,7 @@ experimental results with very few parameter calibration.
 % no keywords
 %finally keywords
 \begin{IEEEkeywords}
- Times-series data integration, large-scale biological network, stochastic and concurrent models.
+ Model construction, data integration, parameters estimation, large-scale network.
 \end{IEEEkeywords}
 
 
