@@ -3,7 +3,7 @@
 \section{Data and Methods}
 
 
-The general workflow for integrating time-series data in model is depicted in Figure \ref{fig:workflow} and comprises the following steps:
+The general workflow for integrating time-series data and model is depicted in  Fig.\ref{fig:workflow} and comprises the following steps:
 
 \begin{figure*}[!t]
  \centering
@@ -45,15 +45,17 @@ A \emph{RSTC Network} $N$ is a couple $(V,E,)$, where:
 \end{itemize}
 \end{definition}
 
-In this definition, terminal nodes can be genes, proteins, complexes, cellular state, biological process and positive condition. 
-On the other side, transient nodes can be transcriptions, translocation, modification and compound. Edges are of different types.
+In this definition, terminal nodes can be genes, proteins, complexes, cellular state, biological processes and positive condition. 
+On the other side, transient nodes can be transcriptions, translocations, modifications and compounds. Edges are of different types.
 We have activation(agent), inhibition, output, input and famillyMemberOf.
 
 \begin{figure*}[!t]
  \centering
  \includegraphics[width=7.5in]{images/net.jpg}
-\caption{{\bf RSTC network. It is the interaction graph that describe the biological case study. It is composed of $293$ nodes and $375$ interactions.
-The set of nodes are composed of terminal nodes(proteins, complexes, genes, compound)}} 
+\caption{{\bf RSTC network. It is the interaction graph that describe the biological case study. It is composed of $293$ nodes and $375$ edges(interactions).
+The set of nodes are composed of terminal nodes(proteins, complexes, genes, cellular state,biological processes and positive condition) and of transient
+nodes(transcriptions, compound, translocations, modifications and compounds). The set of edges are composed of activation(agent), inhibition, output, 
+input and famillyMemberOf}} 
  \label{fig:network}
 \end{figure*}
 
@@ -63,7 +65,7 @@ The set of nodes are composed of terminal nodes(proteins, complexes, genes, comp
 To illustrate our approach, we used the time-series microarray data from Calcium stimulated keratinocyte cells 
  measured at $10$ time-points. A $200$ transcripts were selected for their dynamic patterns,
 that is, their fold expression with respect to the non-stimulated cell was significant in at least one time point. 
-We included in our model a set of $12$ of the $200$ selected(see \ref{tsd}), because we were able to retrieve the regulatory mechanisms upstream
+We included in our model a set of $12$ of the $200$ selected (see Fig.\ref{tsd}), because we were able to retrieve the regulatory mechanisms upstream
 these $12$ genes from public repositories of biochemical reactions.
 The full dataset (data not shown) was produced by the German Cancer Research Center (DKFZ) and it's currently in the process
 of getting published.  
