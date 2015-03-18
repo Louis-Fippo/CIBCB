@@ -7,8 +7,8 @@ The general workflow for integrating time-series data in model is depicted in Fi
 
 \begin{figure*}[!t]
  \centering
- \includegraphics[width=6.5in]{images/workflow-1.png}
-\caption{{\bf Work-flow of our method}} 
+ \includegraphics[width=6.5in]{images/workflow-2.png}
+\caption{{\bf Work-flow for integrating stochastic and temporal informations in large scale network}} 
  \label{fig:workflow}
 \end{figure*}
 
@@ -45,14 +45,17 @@ A \emph{RSTC Network} $N$ is a couple $(V,E,)$, where:
 \end{itemize}
 \end{definition}
 
-In this definition, terminal nodes can be genes, proteins, complexes, cellular state, biological process and positive condition. 
-On the other side, transient nodes can be transcriptions, translocation, modification and compound. Edges are of different types.
+In this definition, terminal nodes can be genes, proteins, complexes, cellular state, biological processes and positive condition. 
+On the other side, transient nodes can be transcriptions, translocations, modifications and compounds. Edges are of different types.
 We have activation(agent), inhibition, output, input and famillyMemberOf.
 
 \begin{figure*}[!t]
  \centering
- \includegraphics[width=7.5in]{images/net1.jpeg}
-\caption{{\bf RSTC network}} 
+ \includegraphics[width=7.5in]{images/net.jpg}
+\caption{{\bf RSTC network. It is the interaction graph that describe the biological case study. It is composed of $293$ nodes and $375$ edges(interactions).
+The set of nodes are composed of terminal nodes(proteins, complexes, genes, cellular state,biological processes and positive condition) and of transient
+nodes(transcriptions, compound, translocations, modifications and compounds). The set of edges are composed of activation(agent), inhibition, output, 
+input and famillyMemberOf}} 
  \label{fig:network}
 \end{figure*}
 

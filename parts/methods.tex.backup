@@ -7,8 +7,8 @@ The general workflow for integrating time-series data in model is depicted in Fi
 
 \begin{figure*}[!t]
  \centering
- \includegraphics[width=6.5in]{images/workflow-1.png}
-\caption{{\bf Work-flow of our method}} 
+ \includegraphics[width=6.5in]{images/workflow-2.png}
+\caption{{\bf Work-flow for integrating stochastic and temporal informations in large scale network}} 
  \label{fig:workflow}
 \end{figure*}
 
@@ -51,8 +51,9 @@ We have activation(agent), inhibition, output, input and famillyMemberOf.
 
 \begin{figure*}[!t]
  \centering
- \includegraphics[width=7.5in]{images/net1.jpeg}
-\caption{{\bf RSTC network}} 
+ \includegraphics[width=7.5in]{images/net.jpg}
+\caption{{\bf RSTC network. It is the interaction graph that describe the biological case study. It is composed of $293$ nodes and $375$ interactions.
+The set of nodes are composed of terminal nodes(proteins, complexes, genes, compound)}} 
  \label{fig:network}
 \end{figure*}
 
@@ -317,11 +318,47 @@ and its type to another procedure which one will traduce the pattern into the pr
     \SWITCH {$m$}
     \CASE {TerminalNode}
       \STATE added node to the pattern $Pat$
-      \STATE Set the code of pattern Pat
-      \STATE return $Pat$
     \ENDCASE
+    
+    \CASE {TransientNode}
+      \STATE detectPattern($Net$,$m$);
+    \ENDCASE
+    
     \ENDSWITCH
    \ENDFOR
+      \STATE Set the code of pattern Pat
+      \STATE return $Pat$
+   \ENDCASE
+   
+     % \CASE {2}
+  % \ENDCASE
+  % \DEFAULT
+  %  \STATE \RETURN ERROR CODE \COMMENT{We can't treat this case}
+  % \ENDDEFAULT
+   \ENDSWITCH
+\ENDCASE
+   
+   \CASE{TransientNode} %\COMMENT{We compact many sub case of all terminal nodes}
+   %\STATE added node to the pattern
+   \STATE numberPredecessor= $n$.getNumberOfPredecessor() \COMMENT{To get the number of predecessor of node $n$}
+   \SWITCH{numberPredecessor}
+   
+   \CASE{1}
+    \FORALL {in comming edge (n-m)}
+    \STATE get the node $m$
+    \SWITCH {$m$}
+    \CASE {TerminalNode}
+      \STATE added node to the pattern $Pat$
+    \ENDCASE
+    
+    \CASE {TransientNode}
+      \STATE detectPattern($Net$,$m$);
+    \ENDCASE
+    
+    \ENDSWITCH
+   \ENDFOR
+      \STATE Set the code of pattern Pat
+      \STATE return $Pat$
    \ENDCASE
    
   % \CASE {2}
@@ -359,10 +396,12 @@ and its type to another procedure which one will traduce the pattern into the pr
   \SWITCH {$type$}
  \CASE {A}
    \STATE out.write("activation")
+   \STATE out.write("")
         
 \ENDCASE
 \CASELINE {I}
   \STATE out.write("inhibition")
+  \STATE 
 \DEFAULT
  \STATE out.write("unknow pattern")
  \ENDDEFAULT
