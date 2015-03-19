@@ -51,7 +51,7 @@ We have activation (agent), inhibition, output, input and famillyMemberOf.
 
 \begin{figure*}[!t]
  \centering
- \includegraphics[width=7.5in]{images/net.jpg}
+ \includegraphics[width=6.5in]{images/net.jpg}
 \caption{{\bf RSTC network. It is the interaction graph that describe the biological case study. It is composed of $293$ nodes and $375$ edges (interactions).
 The set of nodes are composed of terminal nodes(proteins, complexes, genes, cellular state, biological processes and positive conditions) and of transient
 nodes (transcriptions, compound, translocations, modifications and compounds). The set of edges are composed of interactions of type activation (agent), inhibition, output, 
@@ -115,7 +115,7 @@ An action $h=\PHfrappe{a_i}{b_j}{b_k} \in \PHa$ is \emph{playable} in $s \in L$ 
 In such a case, $(s\play h)$ stands for the state resulting from the play of the action $h$ in $s$, with
 $\PHget{(s\play h)}{b} = b_k$ and $\forall c \in \PHs, c \neq b, \PHget{(s\play h)}{c} = \PHget{s}{c}$.
 
-\paragraph{Modeling cooperation \& synchronization.}
+\subsubsection{Modeling cooperation}
 
 As described in \cite{PMR10-TCSB}, the cooperation between processes to make another process bounce can be
 expressed in PH by building a \emph{cooperative sort}.
@@ -129,6 +129,7 @@ Then, to represent the cooperation between processes $a_1$ and $b_1$,
 the process $ab_{11}$ hits $c_1$ to make it bounce to $c_2$ instead of
 independent hits from $a_1$ and $b_1$.
 The same cooperative sort is used to make $a_0$ and $b_0$ cooperate to hit $c_1$ and make it bounce to $c_0$.
+\subsubsection{Modeling synchronization}
 %introdure la synchronization
 Unlike cooperation sort which allow us to model the fact that two components cooperate to hit another component, we introduce
 the notion of synchronization sort, which will implement another type of cooperation. If we refer to our example
@@ -136,6 +137,10 @@ the notion of synchronization sort, which will implement another type of coopera
 4 processes. Then, component $c$ will be activated ($c_1$ bounce to $c_2$) if each one of $a$ and $b$ are also activated. So each 
 one of this processes $ab_1$, $ab_2$, $ab_3$ can activate $c_1$. But to be desactived, we need both $a$ and $b$ to be desactived.
 We will see later why it is important to introduce this new rule for the cooperation between componnets in our real case study.
+
+Remember that PH was designed in order to take very large system analysis into account. Indeed, algorithm were developped on such a
+process??? system so that it prevent for building the whole state graph which would be intractable when there are more than $10$ or 
+$20$ components.
 
 \begin{example}
 \pref{fig:runningPH} represents a PH $(\PHs,\PHl,\PHa)$ with $\PHs = \{a,b,c,ab\}$, and:
@@ -610,19 +615,19 @@ and the stochasticity absorption $sa$. These two parameters will be estimated ac
 described in Section \ref{SECTSD}. 
 
 
-To avoid over fitting in the estimation of these parameters, we propose that each component of the PH, representing a measured gene in the network,  will take the estimated values of the parameters of its respective cluster in the experimental data.
+%To avoid over fitting in the estimation of these parameters, we propose that each component of the PH, representing a measured gene in the network,  will take the estimated values of the parameters of its respective cluster in the experimental data.
 
 
 
-\begin{enumerate}
- \item The first step is to cluster the data set. The goal of the clustering process is to partition genes into groups such that the 
- profiles contained in the same group (cluster) are similar to each other and as different as possible from the profiles assigned to the other
- clusters. The particularity here is to choose the best clustering criteria.
- \item For each cluster obtained in the previous step, estimate the value of $r$ and $sa$ associated to the cluster.
- \item For each component of the PH model associated to the measured gene, determine its cluster, and assign it $r$ and $sa$, the previously  estimated  parameters.
-\end{enumerate}
+%\begin{enumerate}
+% \item The first step is to cluster the data set. The goal of the clustering process is to partition genes into groups such that the 
+% profiles contained in the same group (cluster) are similar to each other and as different as possible from the profiles assigned to the other
+% clusters. The particularity here is to choose the best clustering criteria.
+% \item For each cluster obtained in the previous step, estimate the value of $r$ and $sa$ associated to the cluster.
+% \item For each component of the PH model associated to the measured gene, determine its cluster, and assign it $r$ and $sa$, the previously  estimated  parameters.
+%\end{enumerate}
 
-In our time-series data the components of the PH which need to be associated specific parameters (step 3) are the $12$ genes present in our RSTC network.
+%In our time-series data the components of the PH which need to be associated specific parameters (step 3) are the $12$ genes present in our RSTC network.
 
 \begin{figure}[!t]
 \centering
@@ -692,13 +697,13 @@ of $9$ seleted genes from the times-series data with their respective discrete p
 %On the discrete plot, one can clearly differentiate when a molecule is active or not, which is of extreme importance 
 %swhen modeling these steps in the PH framework if we would like to have coherent simulation results.
 
-\begin{figure}[!t]
+\begin{figure*}[!t]
  \centering
- \includegraphics[width=2.5in]{images/ResultDiscretization.png}
+ \includegraphics[width=6.5in,height=3.5in]{images/ResultDiscretization.png}
  % IllustrationDiscretisation.png: 831x574 pixel, 72dpi, 29.32x20.25 cm, bb=0 0 831 574
- \caption{Illustration of discretization of Experiment Data }
+ \caption{Illustration of discretization of experimental data. Continous lines are descrite data, dashed lines are continuous data}
  \label{fig:illustrationDiscretisation}
-\end{figure}
+\end{figure*}
 
   
 
@@ -797,10 +802,10 @@ We summarise the initial conditions of our simulation in \pref{fig:initialCondit
      \path (TF-\source) edge (I-\source);
      
       %titre du graphe
-    \node[annot] (graphTitle) at (2.5-7,7) {\textcolor{blue}{\small \textbf{Graph Structure}}};
+    \node[annot] (graphTitle) at (2.5-7,7) {\textcolor{blue}{\textbf{Graph Structure}}};
 
     % Annotate the layers
-    \node[annot] (layerTitle) at (-9,7) {\textcolor{blue}{\small \textbf{Layer}}};
+    \node[annot] (layerTitle) at (-9,7) {\textcolor{blue}{\textbf{Layer}}};
     \node[annot, node distance=1cm] (couchesp) at (-9,1) {\textbf{Signaling Proteins} };
     \node[annot] (coucheFT) at (-9,-2) {\textbf{TF} };
     \node[annot] (coucheGene) at (-9,-4) {\textbf{Genes} Output };
@@ -843,7 +848,7 @@ We summarise the initial conditions of our simulation in \pref{fig:initialCondit
 }
 
  
- \caption{Initial conditions}
+ \caption{RSTC network structure and initial conditions assigned to each node in the layer}
  \label{fig:initialCondition}
 \end{figure}
 
