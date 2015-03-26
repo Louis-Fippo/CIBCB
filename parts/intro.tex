@@ -45,7 +45,7 @@ realistic model of biological behavior.
 %les grandes lignes de cette justification sont les suivantes: formalisme très expressif pour les BRN, simulation concurente 
 % provenant de l'algèbre des processus, abstraction permettant de faire de analyse statiques de certaines propriétés. 
 
-For modeling and analyzing stochastic and concurent biological systems, many formalisms have been introduced,such as 
+For modeling and analyzing stochastic and concurent biological systems, many formalisms have been introduced, such as 
 stochastic Petri Nets which is a suitable approach suitable for the representation of parallel systems \cite{molloy1982performance}. 
 They have been successfully and systematically applied in many areas, and the specification Petri Nets
 allows an accurate modeling of a wide range of systems including biological systems \cite{heiner2008petri}. The major 
@@ -72,20 +72,21 @@ more recently, in the form of phospho-proteomics data.
 % les contributions du travail que nous présentons: Génération automatique des modèles en PH(avec et 
 % sans synchronisation), Estiamtion des paramètres des times series data Et intégration des paramètres 
 % dans le modèle.
-%TODO
-The main  results of this work are: (i) automatic PH generation                                                         
-from a biological system composed of biochemical reactions, and extracted from public databases;
-(ii) discretization approach of time-series expression data, so we can 
-reproduce these traces by using in a first attempt the PH stochastic simulation, and afterwards 
-perform static analysis methods for reachability analyses to satisfy this data; and (iii) estimation of the the temporal and stochastic
-parameters of the simulation, based on statistical analyses of the full-compendium of time-series expression data.
-The biological system used as a case-study for this work is a cell-based model of skin differentiation, which 
-is of key importance in  wound healing. 
-
+%TODO revoir le temps et les liaisons
+The main  results of this work are: first, we built an interaction graph linking a signaling molecule, 
+E-cadherin (Calcium sensitive protein), to genes present in our time-series data and to key cellular processes for our case study, such as 
+keratinocyte-differentiation and cellular-proliferation.  This graph was automatically extracted from PID. Second, we propose an automatic                                     %ici il manque une reference.
+transformation of selected known biological patterns present in  PID in order to generate PH modules;
+ adding necessary constraints to the PH model to avoid oscillations. Additionally,                                                 %etre sur que c'est oscillation
+we added necessary constraints to the PH model to avoid biologically incoherent dynamical behaviors.  
+Third, we propose a way of estimating temporal and stochastic parameters from time-series expression data to 
+model the measured genes.  These parameters are used for the stochastic simulation of the model.  Finally, 
+we discretized the experimental data to allow the comparison with simulation results for the above mentioned case 
+study analysis. 
 % You must have at least 2 lines in the paragraph with the drop letter
 % (should never be an issue)
 
 
 %\hfill mds
  
-\hfill March 20, 2015
+%\hfill March 20, 2015
