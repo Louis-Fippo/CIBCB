@@ -651,8 +651,8 @@ described in Section \ref{SECTSD}.
 	      %\pause
 	      \draw[thick,|<->|] (3,0) -- (3,3.5);
 	      %\pause
-	      \draw[thick,dotted,blue] (0,1.16) -- (10,1.16) node[below]{$th1$}; 
-	      \draw[thick,dotted,blue] (0,2.33) -- (10,2.33) node[below]{$th2$}; 
+	      \draw[thick,dotted,blue] (0,1.16) -- (10,1.16) node[right]{$th1$}; 
+	      \draw[thick,dotted,blue] (0,2.33) -- (10,2.33) node[right]{$th2$}; 
 	      %\pause
 	      \draw[thick,dotted,purple] (0.7,1.16) -- (0.7,-.5) node[below]{$t_{1}$};
 	      %\pause
@@ -665,34 +665,35 @@ described in Section \ref{SECTSD}.
            \end{tikzpicture}
 	    
 
-\caption{Illustration of estimation of temporal parameters:$r_{i}=\frac{1}{t_{i}-t_{i-1}}$}
+\caption{Illustration of estimation of temporal parameters:$r_{i}=\frac{1}{t_{i}-t_{i-1}}$. $Max$ represents the maximum expression. $Min$ represents the minimum 
+expression. In this example is $0$ the minimum level. $th1$ and $th2$ represent respectively the first and the second threshold.}
 \label{fig:estimationParameter}
 \end{figure}
 
 \subsubsection{From data to action parameters}
 
 %l'Introduction des données temporelles n'était pas automatique, de plus on ne savait pas le faire des données des séries temporelles.
-Before this work, it were not possible to infer temporal parameters from TSD and integrate them automatically into a model build in to the process hitting formalism.
-It's now possible. For components that we have measured, we know how to estimate and integrate parameters. For others that we don't have measured, we can give default parameters.
-
+%Before this work, it were not possible to infer temporal parameters from TSD and integrate them automatically into a model build in to the process hitting formalism.
+%It's now possible. For components that we have measured, we know how to estimate and integrate parameters. For others that we don't have measured, we can give default parameters.
+For the model, components, which have a measurement in the Time Series Data we estimate and integrate $r$ and $sa$ parameters in the PH model. For others, we assign default 
+parameters. In other to estimate $r$ and $sa$ we ...
 
 
 %discretisation des données
 \subsubsection{Discretization of times-series data}
 
-Because PH simulation is discrete we need to discretize continuous experimental data, so we can compare our simulation outputs.
+Because PH simulation is discrete we need to discretize continuous experimental data so we can compare our simulation outputs.
 The goal of this method was to better determine, according to the gene expression level, when  a given molecule is activated or inhibited.
 To do this, we introduced the new analog concept of Significant Increase or Decrease to characterize the fact that a level of a molecule 
 increases or decreases when crossing a threshold of significance; we limited the possible expression levels for a molecule to
 $\{0, 1, 2\}$. We made this choice because when we look our time-series data (see \pref{fig:tsd}), we can clearly observe a high level of
-activity between $0h$ and $5h$ on one hand, and a slow level of activities between $5h$ and $10h$ on the other hand. In our discretization
-method, our goal is to capture this two times of activities. For achieve this goal, we propose the following discretization method.
-For each time-series, we introduce two thresholds \emph{th1} and \emph{th2} as in \pref{fig:estimationParameter}. The value of this two
-thresholds is compute has follow $\emph{th1}=\frac{1}{3}(MaxLevel-MinLevel)$ and $\emph{th2}=\frac{2}{3}(MaxLevel-MinLevel)$. Therefore, all
-the expression level of a time-series between $[0-th1]$ will have level $0$, all those between $[th1-th2]$ will have level $1$ and the last group will
-have level $2$. By this way, we can automatically determine the differents level of expression of all our time-series data. 
+activity between $0h$ and $5h$ and a slow level of activity between $5h$ and $10h$ on the other hand. The goal of the discretization method is to capture these
+two activation times. For each time-series, we introduce two thresholds \emph{th1} and \emph{th2} as in \pref{fig:estimationParameter}. The value of this two
+thresholds is compute as follows $\emph{th1}=\frac{1}{3}(MaxLevel-MinLevel)$ and $\emph{th2}=\frac{2}{3}(MaxLevel-MinLevel)$. Therefore, all
+of the expression level in the range $[0-th1]$ will have level $0$, all those in the range $[th1-th2]$ will have level $1$ and the last group will
+have level $2$. In  this way we can automatically determine the differents levels of expression of the TSD. 
 %illustration des résultats de la méthode de discrétisation
-To illustrate the result of our discretization algorithm, we plot in \pref{fig:illustrationDiscretisation} the expression 
+To illustrate the result of our discretization algorithm we plot in \pref{fig:illustrationDiscretisation} the expression 
 of $9$ seleted genes from the times-series data with their respective discrete plots. 
 %On the discrete plot, one can clearly differentiate when a molecule is active or not, which is of extreme importance 
 %swhen modeling these steps in the PH framework if we would like to have coherent simulation results.
@@ -710,21 +711,22 @@ of $9$ seleted genes from the times-series data with their respective discrete p
 
 \subsection{Simulation: Initials conditions}
 %we give the initial condition for the simulation
-To better understand the results of simulation, we need to give initial conditions for the components of our network. Because the components of the network are group into 
+To run the simulation we need to set initial conditions for the components of our network. Because the components of the network are grouped into 
 layers, the initial conditions will be the same in the different layers. In the following we will present the initial conditions that we have chosen for the different 
 components.
 
 \begin{itemize}
  \item \textbf{Receptor layer: E-cadherin.} We choose the  pulse signal for the input node E-cadherin, that will be active for a duration of average $x$ units times. We made this 
- choise to take into account the average time of calcium stimuli effect.
+ choice to take into account the average time of calcium stimuli effect.
  \item \textbf{Signaling layer: signaling proteins.} At this layer, the components will be activated and inhibited according to the same rate and the same stochasticity absorption factor.
- The values of this parameters where selected by considering the time of signal transduction from the entry node(E-cadherin) to the output node (genes).
- \item \textbf{Transcription layer: Transcription factors.} At this stage, the signal will come from signaling proteins for activation. But for the inhibition, in addition 
+ The values of these parameters where selected by considering the time of signal transduction from the entry node (E-cadherin) to the output node (genes).[imposing reachability
+ constraints from entry node Ecad].
+ \item \textbf{Transcription layer: transcription factors.} At this stage, the signal will come from signaling proteins for activation. But for the inhibition, in addition 
  of the signal come from signaling proteins, we introduce an auto-inhibition which will represented a degradation of the transcription factor.
- \item \textbf{Cell-state: Gene and cellular  process.} The genes will be activited or inhibited according to the estimated values from time-series data.
+ \item \textbf{Cell-state: genes and cellular  process.} The genes will be activited or inhibited according to the estimated values from time-series data.
 \end{itemize}
 
-We summarise the initial conditions of our simulation in \pref{fig:initialCondition} were we can clearly see the initial values choose at each layer for our model.
+We summarize the initial conditions of our simulation in \pref{fig:initialCondition} were we can clearly see the initial values choose at each layer for our model.
 
 \begin{figure}[!t]
  \centering
@@ -802,36 +804,36 @@ We summarise the initial conditions of our simulation in \pref{fig:initialCondit
      \path (TF-\source) edge (I-\source);
      
       %titre du graphe
-    \node[annot] (graphTitle) at (2.5-7,7) {\textcolor{blue}{\textbf{Graph Structure}}};
+    \node[annot] (graphTitle) at (2.5-7,7) {\textcolor{blue}{\large \textbf{Graph Structure}}};
 
     % Annotate the layers
-    \node[annot] (layerTitle) at (-9,7) {\textcolor{blue}{\textbf{Layer}}};
-    \node[annot, node distance=1cm] (couchesp) at (-9,1) {\textbf{Signaling Proteins} };
-    \node[annot] (coucheFT) at (-9,-2) {\textbf{TF} };
-    \node[annot] (coucheGene) at (-9,-4) {\textbf{Genes} Output };
-    \node[annot] (noeudEntre) at (-9,5) {\textbf{Ecad} Input };
+    \node[annot] (layerTitle) at (-9,7) {\textcolor{blue}{\large \textbf{Layer}}};
+    \node[annot, node distance=1cm] (couchesp) at (-9,1) {\large \textbf{Signaling Proteins} };
+    \node[annot] (coucheFT) at (-9,-2) {\large \textbf{TF} };
+    \node[annot] (coucheGene) at (-9,-4) {\large \textbf{Genes} Output };
+    \node[annot] (noeudEntre) at (-9,5) {\large \textbf{Ecad} Input };
     
     %noeud pour ajouter le R S T C 
-    \node[annot] (R) at (-11,5) {\textcolor{black}{\textbf{R}}};
-    \node[annot] (S) at (-11,1) {\textcolor{black}{\textbf{S}}};
-    \node[annot] (T) at (-11,-2) {\textcolor{black}{\textbf{T}}};
-    \node[annot] (C) at (-11,-4) {\textcolor{black}{\textbf{C}}};
+    \node[annot] (R) at (-11,5) {\textcolor{black}{\textbf{\LARGE R}}};
+    \node[annot] (S) at (-11,1) {\textcolor{black}{\textbf{\LARGE S}}};
+    \node[annot] (T) at (-11,-2) {\textcolor{black}{\textbf{\LARGE T}}};
+    \node[annot] (C) at (-11,-4) {\textcolor{black}{\textbf{\LARGE C}}};
     \node[annot] (test) at (5,-4) {\textcolor{black}{\textbf{}}};
     
     %noeud pour les règles de modélisation
-    \node[annot] (icTitle) at (0,7) {\textcolor{blue}{\textbf{\small Initial Conditions}}};
-    \node[annot] (RMi) at (0,4.5) {\textcolor{black}{\textbf{1}}};
-    \node[annot] (SMi) at (0,1) {\textcolor{black}{\textbf{0}}};
-    \node[annot] (TMi) at (0,-2) {\textcolor{black}{\textbf{0}}};
-    \node[annot] (CMi) at (0,-4) {\textcolor{black}{\textbf{0}}};
+    \node[annot] (icTitle) at (0,7) {\textcolor{blue}{\textbf{\large Initial Conditions}}};
+    \node[annot] (RMi) at (0,4.5) {\textcolor{black}{\textbf{\LARGE 1}}};
+    \node[annot] (SMi) at (0,1) {\textcolor{black}{\textbf{\LARGE 0}}};
+    \node[annot] (TMi) at (0,-2) {\textcolor{black}{\textbf{\LARGE 0}}};
+    \node[annot] (CMi) at (0,-4) {\textcolor{black}{\textbf{\LARGE 0}}};
     %\node[annot] (P) at (5,-4) {\textcolor{black}{\huge \textbf{}}};
     
-    %noeuds pour les hypothèses de modélisation
-    \node[annot] (parameterTitle) at (3,7) {\textcolor{blue}{\small \textbf{Parameters}}};
-    \node[annot] (RH) at (3,5) {\textcolor{black}{\textbf{-}}};
-    \node[annot] (SH) at (3,2) {\textcolor{black}{\small \textbf{r=$10$ - sa=$50$}}};
-    \node[annot] (TH) at (3,-1) {\textcolor{black}{\small \textbf{r=$10$ - sa=$50$}}};
-    \node[annot] (CH) at (3,-4) {\textcolor{black}{\small \textbf{learned from TSD}}};
+    %noeuds pour les hypothèses de modélisation 
+    \node[annot] (parameterTitle) at (3,7) {\textcolor{blue}{\textbf{\large Parameters}}};   %text width=3cm
+    \node[annot] (RH) at (3,5) {\textcolor{black}{\textbf{\LARGE -}}};
+    \node[annot] (SH) at (3,2) {\textcolor{black}{\small \textbf{\LARGE r=$10$ - sa=$50$}}};
+    \node[annot] (TH) at (3,-1) {\textcolor{black}{\small \textbf{\LARGE r=$10$ - sa=$50$}}};
+    \node[annot] (CH) at (3,-4) {\textcolor{black}{\small \textbf{\large learned from TSD}}};
     %\node[annot] (test) at (5,-4) {\textcolor{black}{\huge \textbf{}}};
     
     %noeuds de repères pour les sous-graphs

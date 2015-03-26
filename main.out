@@ -14,8 +14,8 @@
 \BOOKMARK [2][-]{subsection.2.4}{Simulation: Initials conditions}{section.2}% 14
 \BOOKMARK [1][-]{section.3}{Results}{}% 15
 \BOOKMARK [2][-]{subsection.3.1}{From PID to PH: On automatic generation of PH code of the network}{section.3}% 16
-\BOOKMARK [2][-]{subsection.3.2}{Simulation experience}{section.3}% 17
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Without the introduction of synchronization gate}{subsection.3.2}% 18
-\BOOKMARK [3][-]{subsubsection.3.2.2}{With the introduction of synchronization gate}{subsection.3.2}% 19
+\BOOKMARK [2][-]{subsection.3.2}{Simulation}{section.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Without the introduction of synchronization sort}{subsection.3.2}% 18
+\BOOKMARK [3][-]{subsubsection.3.2.2}{With the introduction of synchronization sort}{subsection.3.2}% 19
 \BOOKMARK [1][-]{section.4}{Conclusion}{}% 20
 \BOOKMARK [1][-]{section*.1}{References}{}% 21

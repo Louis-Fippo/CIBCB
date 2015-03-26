@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.14)  19 MAR 2015 18:09
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.14)  26 MAR 2015 10:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1023,15 +1023,11 @@ l.551 \node[es]
                 (d) at (1,3) {activation or inhibition};
 (That was another \errmessage.)
 
-[4]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [5]
-<images/ResultDiscretization.png, id=261, 834.11626pt x 576.1525pt>
+[4] [5] <images/ResultDiscretization.png, id=261, 834.11626pt x 576.1525pt>
 File: images/ResultDiscretization.png Graphic file (type png)
 
 <use images/ResultDiscretization.png>
-Package pdftex.def Info: images/ResultDiscretization.png used on input line 702
+Package pdftex.def Info: images/ResultDiscretization.png used on input line 703
 .
 (pdftex.def)             Requested size: 469.762pt x 252.94522pt.
 Missing character: There is no ; in font nullfont!
@@ -1039,21 +1035,37 @@ Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 
-Overfull \hbox (4.38757pt too wide) in paragraph at lines 848--848
- [][][][][]\OT1/ptm/b/n/9 Parameters[] 
+Overfull \hbox (8.02339pt too wide) in paragraph at lines 850--850
+ [][][][]\OT1/ptm/b/n/12 Signaling 
+ []
+
+
+Overfull \hbox (19.1835pt too wide) in paragraph at lines 850--850
+ [][][][][]\OT1/ptm/b/n/12 Parameters[] 
+ []
+
+LaTeX Font Info:    Calculating math sizes for size <17> on input line 850.
+
+Overfull \hbox (0.65256pt too wide) in paragraph at lines 850--850
+ \OT1/ptm/b/n/17 sa=$\OT1/cmr/m/n/17.28 50$[] 
+ []
+
+
+Overfull \hbox (0.65256pt too wide) in paragraph at lines 850--850
+ \OT1/ptm/b/n/17 sa=$\OT1/cmr/m/n/17.28 50$[] 
  []
 
 ) (./parts/results.tex <images/resultWOS.pdf, id=268, 505.89pt x 505.89pt>
 File: images/resultWOS.pdf Graphic file (type pdf)
 
 <use images/resultWOS.pdf>
-Package pdftex.def Info: images/resultWOS.pdf used on input line 41.
+Package pdftex.def Info: images/resultWOS.pdf used on input line 48.
 (pdftex.def)             Requested size: 469.76265pt x 252.94437pt.
  <images/resultWS.pdf, id=271, 505.89pt x 505.89pt>
 File: images/resultWS.pdf Graphic file (type pdf)
 
 <use images/resultWS.pdf>
-Package pdftex.def Info: images/resultWS.pdf used on input line 53.
+Package pdftex.def Info: images/resultWS.pdf used on input line 62.
 (pdftex.def)             Requested size: 469.76265pt x 252.94437pt.
 ) (./parts/conclusion.tex) [6]
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1081,15 +1093,15 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 486.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 486.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 486.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 41081294893624827F0238A4ABAE54BC;1698.
+(rerunfilecheck)             Checksum: B67312833AFFF8D2A4CF758EB32CEE25;1687.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 486.
  ) 
 Here is how much of TeX's memory you used:
- 18906 strings out of 493304
- 350546 string characters out of 6139871
- 517389 words of memory out of 5000000
- 21839 multiletter control sequences out of 15000+600000
- 52925 words of font info for 107 fonts, out of 8000000 for 9000
+ 18931 strings out of 493304
+ 350941 string characters out of 6139871
+ 517588 words of memory out of 5000000
+ 21862 multiletter control sequences out of 15000+600000
+ 58600 words of font info for 120 fonts, out of 8000000 for 9000
  960 hyphenation exceptions out of 8191
  58i,18n,73p,624b,1298s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -1100,21 +1112,21 @@ type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/symbols/msam10.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qhvr.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf
--dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
-tmri8a.pfb>
-Output written on main.pdf (8 pages, 2750432 bytes).
+17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qhvr.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
+utmri8a.pfb>
+Output written on main.pdf (8 pages, 2751870 bytes).
 PDF statistics:
  643 PDF objects out of 1000 (max. 8388607)
  515 compressed objects within 6 object streams
