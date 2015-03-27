@@ -53,7 +53,7 @@ We have activation (agent), inhibition, output, input and famillyMemberOf.
  \centering
  \includegraphics[width=6.5in]{images/net.jpg}
 \caption{{\bf RSTC network. It is the interaction graph that describe the biological case study. It is composed of $293$ nodes and $375$ edges (interactions).
-The set of nodes are composed of terminal nodes(proteins, complexes, genes, cellular state, biological processes and positive conditions) and of transient
+The set of nodes are composed of terminal nodes (proteins, complexes, genes, cellular state, biological processes and positive conditions) and of transient
 nodes (transcriptions, compound, translocations, modifications and compounds). The set of edges are composed of interactions of type activation (agent), inhibition, output, 
 input and famillyMemberOf}} 
  \label{fig:network}
@@ -73,7 +73,7 @@ of being published.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=2.5in]{images/12genes.png}
-\caption{\bf Plot of $12$ selected genes}
+\caption{\bf Plot of $12$ selected genes. $X$ axe represent time duration of the experiment. $Y$ represent the expression level of genes}
 \label{fig:tsd}
 \end{figure}
 
@@ -130,17 +130,22 @@ the process $ab_{11}$ hits $c_1$ to make it bounce to $c_2$ instead of
 independent hits from $a_1$ and $b_1$.
 The same cooperative sort is used to make $a_0$ and $b_0$ cooperate to hit $c_1$ and make it bounce to $c_0$.
 \subsubsection{Modeling synchronization}
+\label{sssec:synchronization}
 %introdure la synchronization
 Unlike cooperation sort which allows  to model the fact that two components cooperate to hit another component, we introduce
 the notion of \emph{synchronization sort}, which will implement another type of cooperation. If we refer to the example of
 \pref{fig:runningPH}, and asume that $ab$ is our \emph{synchronization sort} between sorts $a$ and $b$, defined with also 
 4 processes. Then, component $c$ is activated ($c_1$ bounce to $c_2$) if each one of $a$ and $b$ are also activated. So each 
 one of this processes $ab_1$, $ab_2$, $ab_3$ can activate $c_1$. But to be inhibited, both $a$ and $b$ are needed.
-%We will see later why it is important to introduce this new rule for the cooperation between componnets in our real case study.
-The impact of this new rule for components cooperation is highlithed in the following.
-Remember that PH was designed in order to take very large system analysis into account. Indeed, algorithm were developped on such a
-process??? system so that it prevent for building the whole state graph which would be intractable when there are more than $10$ or 
-$20$ components.
+The interest of this rule is that it avoids oscillations between the processes of a sort regulated independantly by 
+two predecessors. Oscillations occur because each of the predecessor can independantly activated the target component if it is actived,
+but if the other component are inhibited, it will inhibited the target component. This competition between the two predecessors
+generates the oscillations on the target component.  
+
+
+[Remember that PH was designed in order to take very large system analysis into account. Indeed, algorithm were developped on such a
+process??? system so that it prevent for building the whole state graph which would be intractable when there are more than $10$ or    % a re voir 
+$20$ components.]
 
 \begin{example}
 \pref{fig:runningPH} represents a PH $(\PHs,\PHl,\PHa)$ with $\PHs = \{a,b,c,ab\}$, and:
@@ -269,13 +274,13 @@ In the following we present our automatic approach to generate a PH model from a
 
 %Here is the first and the most important part of this work. 
 In order to model the RSTC network as a PH model we select known biological regulatory patterns (atomic set of biological components and their interacting roles), represented 
-as biochemical reactions in the RSTC network, and propose their PH representation. 
+as biochemical reactions in the RSTC network, and propose their PH representation as illustrate in Algorithm \ref{automaticGenerationOfPHModel}. 
 
 %les ajouts pour les patterns 
-We build an algorithm that automatically browse the graph node by node and detect all patterns in the graph. More precisely, for each node (output node of the pattern) we  call a recursive procedure,
-that  allow  to detect a minimal set of node(input node of the pattern) that has a direct influence on that node. This set of nodes plus the output node and the way  are linked are a pattern for us. 
+We build an algorithm (see Algorithm \ref{PatternDetection}) that automatically browse the graph node by node and detect all patterns in the graph. More precisely, for each node (output node of the pattern) we  call a recursive procedure,
+that  allow  to detect a minimal set of node (input node of the pattern) that has a direct influence on that node. This set of nodes plus the output node and the way  are linked are a pattern. 
 The type of a pattern is determined by the type of the output node, the type of regulations comes on that node and the type of input nodes of the pattern. So the algorithm that detects patterns returns the pattern 
-and its type to another procedure which  translates the pattern into the process hitting formalism. This transformation  takes care of different cases (cooperation, synchronization, simple activation, simple inhibition,...)
+and its type to another procedure (see Algorithm \ref{PHModelGeneration} which  translates the pattern into the process hitting formalism. This transformation  takes care of different cases (cooperation, synchronization, simple activation, simple inhibition,...)
 
 
 
@@ -286,21 +291,23 @@ and its type to another procedure which  translates the pattern into the process
 
 %%%%algorithm of patterns detection in all the network
 
-\begin{figure}[!t]
+%\begin{figure}[!t]
+\begin{algorithm}
 \begin{algorithmic}[1]
 %\Procedure{patternDetection}{$Net,n$}\Comment{Given a node n, detect a set of minimal nodes that has a direct regulatory effect on n}
-\REQUIRE $Net$
-\ENSURE return all the patterns associated to the given network $Net$
-\FORALL{ Node $n$ in $Net$ } 
-\STATE $Pat$ = detectPattern($Net$, $n$)
-\STATE patternInPHModel($out$,$Pat$)
+\REQUIRE $Net$ \COMMENT{ The RSTC network}
+\ENSURE generate the PH Model associated to $Net$
+\FORALL{ Node $n$ in $Net$.getSetOfNodes () } 
+\STATE $Pat$ = detectPattern ($Net$, $n$)
+\STATE patternInPHModel ($out$,$Pat$)
 
 \ENDFOR
 %\STATE \textbf{return} $b$%\Comment{The gcd is b}
 \end{algorithmic}
-\caption{\bf Pattern detection in an RSTC Network}
-\label{patternDetection}
-\end{figure}
+\caption{\bf Algorithm for Pattern detection in an RSTC Network and to generate the equivalent model in the PH formalism}
+\label{automaticGenerationOfPHModel}
+\end{algorithm}
+%\end{figure}
 
 
 %%%%%algorithm for detect the pattern of a given node
@@ -309,31 +316,30 @@ and its type to another procedure which  translates the pattern into the process
 \begin{algorithm}
 \begin{algorithmic}[1]
 %\Procedure{patternInPHModel}{$out,Pat$}\Comment{Write on the flux out the PH Model of a given pattern (Pat)}
-\REQUIRE $Net$, $n$
-\ENSURE Detect a pattern associated to a given node (n in this case)
+\REQUIRE $Net$, $n$ \COMMENT{$Net$ is the network and $n$ is the current node}
+\ENSURE Build a set of nodes associated to node $n$ that we call pattern.
 %\WHILE{$r\not=0$}  %\Comment{We have the answer if r is 0}
 \SWITCH {$n$}
  \CASE{TerminalNode} %\COMMENT{We compact many sub case of all terminal nodes}
-   \STATE added node to the pattern
-   \STATE numberPredecessor= $n$.getNumberOfPredecessor() \COMMENT{To get the number of predecessor of node $n$}
+   \STATE add node n to the pattern $Pat$
+   \STATE numberPredecessor= $n$.getNumberOfPredecessor () %\COMMENT{To get the number of predecessor of node $n$}
    \SWITCH{numberPredecessor}
    
    \CASE{1}
-    \FORALL {in comming edge (n-m)}
-    \STATE get the node $m$
-    \SWITCH {$m$}
+    \FORALL {$p$ in setOfPredecessor (n)}
+     \SWITCH {$p$}
     \CASE {TerminalNode}
-      \STATE added node to the pattern $Pat$
+      \STATE add node n to the pattern $Pat$
     \ENDCASE
     
     \CASE {TransientNode}
-      \STATE detectPattern($Net$,$m$);
+      \STATE detectPattern ($Net$, $p$);
     \ENDCASE
     
     \ENDSWITCH
    \ENDFOR
-      \STATE Set the code of pattern Pat
-      \STATE return $Pat$
+      \STATE Set the code of pattern $Pat$;
+      \STATE return $Pat$;
    \ENDCASE
    
      % \CASE {2}
@@ -346,25 +352,24 @@ and its type to another procedure which  translates the pattern into the process
    
    \CASE{TransientNode} %\COMMENT{We compact many sub case of all terminal nodes}
    %\STATE added node to the pattern
-   \STATE numberPredecessor= $n$.getNumberOfPredecessor() \COMMENT{To get the number of predecessor of node $n$}
+   \STATE numberPredecessor= $n$.getNumberOfPredecessor () %\COMMENT{To get the number of predecessor of node $n$}
    \SWITCH{numberPredecessor}
    
    \CASE{1}
-    \FORALL {in comming edge (n-m)}
-    \STATE get the node $m$
-    \SWITCH {$m$}
+    \FORALL {$p$ in setOfPredecessor (n)}
+    \SWITCH {$p$}
     \CASE {TerminalNode}
-      \STATE added node to the pattern $Pat$
+      \STATE added node to the pattern $Pat$;
     \ENDCASE
     
     \CASE {TransientNode}
-      \STATE detectPattern($Net$,$m$);
+      \STATE detectPattern ($Net$, $p$);
     \ENDCASE
     
     \ENDSWITCH
    \ENDFOR
-      \STATE Set the code of pattern Pat
-      \STATE return $Pat$
+      \STATE Set the code of pattern $Pat$;
+      \STATE return $Pat$;
    \ENDCASE
    
   % \CASE {2}
@@ -382,7 +387,7 @@ and its type to another procedure which  translates the pattern into the process
 \ENDSWITCH
 %\ENDWHILE\label{euclidendwhile}
 \end{algorithmic}
-\caption{\bf Detection of Pattern associated to the node n} \label{PatternDetectionNode}
+\caption{\bf algorithm for pattern detection; function detectPattern ($Net$, $n$)} \label{PatternDetection}
 \end{algorithm}
 %\end{figure}
 
@@ -397,22 +402,19 @@ and its type to another procedure which  translates the pattern into the process
 \REQUIRE $out$, $Pat$ \COMMENT{ Pat is The pattern to be translate into the PH Model, out is the output file}
 \ENSURE The correspondant PH Model of the given pattern Pat will write into the file $out$
 %\WHILE{$r\not=0$}  %\Comment{We have the answer if r is 0}
-\STATE $nocp$ = $Pat$.getNumberOfComponents() \COMMENT{Number of the components of the pattern $Pat$}
-\STATE $tabPat$ = $Pat$.getTableOfPattern() \COMMENT{return the components of the pattern in $tabPat$}
+\STATE $nocp$ = $Pat$.getNumberOfComponents () \COMMENT{Number of the components of the pattern $Pat$}
+\STATE $tabPat$ = $Pat$.getTableOfPattern () \COMMENT{return the components of the pattern in $tabPat$}
 \SWITCH {$nocp$}
  \CASE {2}
   \SWITCH {$type$}
  \CASE {A}
-   \STATE out.write("activation")
-   \STATE out.write("")
-        
+  \STATE out.write ($tabPat[1]$ 1 $->$ $tabPat[0]$ $0$ $1$ $r_{a}$ $sa_{a}$);  \COMMENT{Component $tabPat[1]$ activates component $tabPat[0]$ with $r = r_{a}$ and $sa = sa_{a}$ }     
 \ENDCASE
 \CASELINE {I}
-  \STATE out.write("inhibition")
-  \STATE 
-\DEFAULT
- \STATE out.write("unknow pattern")
- \ENDDEFAULT
+  \STATE out.write ($tabPat[1]$ 0 $->$ $tabPat[0]$ $1$ $0$ $r_{i}$ $sa_{i}$);  \COMMENT{Component $tabPat[1]$ inhibits component $tabPat[0]$ with $r = r_{i}$ and $sa = sa_{i}$ }  
+%\DEFAULT
+% \STATE out.write ((*unknow pattern*));
+% \ENDDEFAULT
 \ENDSWITCH
    
    
@@ -421,13 +423,13 @@ and its type to another procedure which  translates the pattern into the process
 \CASE {3}
   \SWITCH {$type$}
  \CASE {C}
-   \STATE out.write("cooperation")
+   \STATE out.write (coop ([$tabPat[2]$;$tabPat[1]$)] $->$ $tabPat[0]$ $0$ $1$, [[$1$;$1$]] ); \COMMENT{Cooperation between $tabPat[1]$ and $tabPat[2]$ to activate $tabPat[0]$}
         
 \ENDCASE
 \CASELINE {S}
-  \STATE out.write("synchronization")
+  \STATE out.write (coop ([$tabPat[2]$;$tabPat[1]$)] $->$ $tabPat[0]$ $0$ $1$, [[$1$;$1$],[$1$;$0$],[$0$;$1$]]); \COMMENT{Synchronization between $tabPat[1]$ and $tabPat[2]$ to activate $tabPat[0]$}
 \DEFAULT
- \STATE out.write("unknow pattern")
+ \STATE out.write ((*unknow pattern*));
  \ENDDEFAULT
 \ENDSWITCH
    
@@ -441,7 +443,7 @@ and its type to another procedure which  translates the pattern into the process
 \ENDSWITCH
 %\ENDWHILE\label{euclidendwhile}
 \end{algorithmic}
-\caption{\bf Pattern in PH Model} \label{PHModel}
+\caption{\bf Algorithm for writing a given pattern into a file; function patternInPHModel ($out$,$Pat$)} \label{PHModelGeneration}
 \end{algorithm}
 %\end{figure}
 
@@ -450,7 +452,7 @@ and its type to another procedure which  translates the pattern into the process
 For example a molecule $a$ cooperatting with a molecule $b$ to activate a molecule $c$ \pref{fig:runningPH} (left), is a regulatory pattern because it is a protein-complex biochemical reaction that appears recurrent times.  
 We model this pattern by four sorts \pref{fig:runningPH} (right) $a$, $b$, $c$ and $ab$. Sorts $a$, $b$ and $c$
 stand for components $a$, $b$ and $c$. The cooperative sort $ab$ is introduced in order to characterize constraints on the components $a$ and $b$.
-In the RSTC network, we find $11$(to be precise...) regulatory patterns (see Appendix \ref{table_patterns}). 
+In the RSTC network, we find $11$(to be precise...) regulatory patterns (see Appendix \ref{table_patterns}).     %TODO
 
 \begin{table}[!t]
 \renewcommand{\arraystretch}{1.3}
@@ -613,7 +615,8 @@ biological reactions by performing simulations.
 On the one hand, we consider the probability of a reaction to occur, and on the other hand, we 
 consider stochastic parameters in the aim at observing an expected behavior. 
 In the PH framework, to play an action we need two essential parameters: the rate $r$ or the temporal parameter because $t=r^{-1}$ if we assume that $t$ is the average time of playing an action
-and the stochasticity absorption $sa$. These two parameters are estimated according to the expression profile of time-series data of the experiment
+and the stochasticity absorption factor $sa$. The stochasticity absorption factor is introduce to control the higher variance 
+around the mean duration of playing an action. These two parameters are estimated according to the expression profile of time-series data of the experiment
 described in Section \ref{SECTSD}. 
 
 
@@ -678,13 +681,15 @@ expression. In this example is $0$ the minimum level. $th1$ and $th2$ represent 
 %Before this work, it were not possible to infer temporal parameters from TSD and integrate them automatically into a model build in to the process hitting formalism.
 %It's now possible. For components that we have measured, we know how to estimate and integrate parameters. For others that we don't have measured, we can give default parameters.
 For the model, components, which have a measurement in the Time Series Data we estimate and integrate $r$ and $sa$ parameters in the PH model. For others, we assign default 
-parameters. In other to estimate $r$ and $sa$ we ...
+parameters. In other to estimate $r_{i}$ and $sa_{i}$ for each action $h_{i} \in \PHa$, we need to know differents times $t_{i}$  when the action can be firing as illustrate 
+in \pref{fig:estimationParameter}. Each  $t_{i}$ represent the time in which we assume that a component move from one process to another. Therefore the action that leads this 
+change must be played with the rate $r_{i}=\frac{1}{t_{i}-t_{i-1}}$. For $sa$, which is an integer, the larger it is, the higher the variance around the rate is small.
 
 
 %discretisation des données
 \subsubsection{Discretization of times-series data}
 
-Because PH simulation is discrete, we need to discretize continuous experimental data so we can compare our simulation outputs.
+Because PH simulation is discrete, we need to discretize continuous experimental data so we can compare the simulation outputs.
 The goal of this method is to better determine, according to the gene expression level, when  a given molecule is activated or inhibited.
 To do this, we introduce the new analog concept of Significant Increase or Decrease to characterize the fact that a level of a molecule 
 increases or decreases when crossing a threshold of significance; we limite the possible expression levels for a molecule to
@@ -693,9 +698,9 @@ activity between $0h$ and $5h$ and a slow level of activity between $5h$ and $10
 two activation times. For each time-series, we introduce two thresholds \emph{th1} and \emph{th2} as in \pref{fig:estimationParameter}. The value of this two
 thresholds is computed as follows $\emph{th1}=\frac{1}{3}(MaxLevel-MinLevel)$ and $\emph{th2}=\frac{2}{3}(MaxLevel-MinLevel)$. Therefore, all
 of the expression levels in the range $[0-th1]$ is at level $0$, all those in the range $[th1-th2]$  have level $1$ and the last group are at
-level $2$. In  this way we can automatically determine the differents levels of expression of the TSD. 
+level $2$. Thus we can automatically determine the differents levels of expression of the TSD. 
 %illustration des résultats de la méthode de discrétisation
-To illustrate the result of our discretization algorithm we plot in \pref{fig:illustrationDiscretisation} the expression 
+To illustrate the result of the discretization algorithm we plot in \pref{fig:illustrationDiscretisation} the expression 
 of $9$ seleted genes from the times-series data with their respective discrete plots. 
 %On the discrete plot, one can clearly differentiate when a molecule is active or not, which is of extreme importance 
 %swhen modeling these steps in the PH framework if we would like to have coherent simulation results.
@@ -718,11 +723,13 @@ layers, the initial conditions will be the same in the different layers. In the 
 components.
 
 \begin{itemize}
- \item \textbf{Receptor layer: E-cadherin.} We choose the  pulse signal for the input node E-cadherin, that is active for a duration of $x$ units times in average. We made this 
+ \item \textbf{Receptor layer: E-cadherin.} We choose the  pulse signal for the input node E-cadherin, that is active for a duration of $5$ units times in average. We made this 
  choice to take into account the average time of the calcium stimuli effect.
- \item \textbf{Signaling layer: signaling proteins.} At this layer, the components are activated and inhibited according to the same rate and the same stochasticity absorption factor.
- The values of these parameters were selected by considering the delay of signal transduction from the entry node (E-cadherin) to the output node (genes).[imposing reachability
- constraints from entry node Ecad].
+ \item \textbf{Signaling layer: signaling proteins.} At this layer, the components are activated with to the same rate and the same stochasticity absorption factor. They are inhibited
+ with the same rate and the same stochasticity absorption factor. Nevertheless, the choice of inhnibition parameters must ensure that the time interval in which the inhibition action 
+ is firing is greater than the time interval of firing activation action on the same component. More it should not be any overlap between the two time intervals. This two conditions
+ are reachability constraints from entry  node (E-cadherin) to the output node genes. The values of these parameters are selected by considering the delay of signal transduction from the entry
+ node (E-cadherin) to the output node (genes).
  \item \textbf{Transcription layer: transcription factors.} At this stage, the signal comes from signaling proteins for activation. But for the inhibition, in addition 
  to the signal come from signaling proteins, we introduce an auto-inhibition which representes the degradation of the transcription factor.
  \item \textbf{Cell-state: genes and cellular  process.} The genes are activited or inhibited according to the estimated values from time-series data.

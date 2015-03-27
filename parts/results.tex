@@ -4,7 +4,7 @@
 \subsection{From PID to PH: On automatic generation of PH code of the network}
 %give statistics
 
-To simulate of the model, we generated a PINT code to be simulated by the PINT simulator\footnote{Available at \url{http://process.hitting.free.fr}}. 
+To simulate of the model, we generated a PINT code to be simulated by the PINT simulator \footnote{Available at \url{http://process.hitting.free.fr}}. 
 For the PINT code generation we use two procedures as describe in the method section. The first procedure that detect the patterns and its code. Then the second 
 procedure that generate the PINT code by taking in consideration the type of the pattern to better refine the dynamic of the system on a structural point of view.
 This refinement is done by introducing the synchronization sort  which is a generalization of the cooperation sort. This allow  to avoid artificial oscillations
@@ -27,17 +27,14 @@ in the dynamics of the components of the system.
 %present common characteristics and show us the coherence of our approach of modelization. The common characteristics
 %are the following:
 
-We simulated the model with and without the inclusion of the synchronization sort.
-\begin{itemize}
- \item We can modele large scale networks in which signal goes from an input node to the output nodes.
- \item We can reproduce tendences of the dynamic of components as illustrate in \pref{fig:rwos} and \pref{fig:rws}.
- \item The model take in to accout the stochastic and time aspect of the bihaviours of the biological system.
-\end{itemize}
-
+We simulated the model with and without the inclusion of the synchronization sort. In the following, we present the results of 
+the simulation.
 
 \subsubsection{Without the introduction of synchronization sort}
 One can easily notice in \pref{fig:rwos} the occurence of oscillations. This is not the expected behavior from the biological system
-but it is coherent with the choice of modelisation: cooperation sorts were used to model multiple regulators of a common target. 
+but it is coherent with the choice of modelisation and the way the simulator works as explained in \ref{sssec:synchronization}: cooperation
+sorts are used to model multiple regulators of a common target
+where this is clearly identifiable. In other cases we left the components act independently.
 It is important to notice that the intensity of the oscillation is linked with 
 the size of the concurrence, i.e. the number of predecessors that a node in the network has.
 Despite the presence of the oscillations, the model reproduces expected dynamical behavoirs  namely
@@ -54,7 +51,9 @@ come from the discretization of time-series data. In Blue line the simulation be
 
 From \pref{fig:rws} we can see that the introduction of the synchronization sort significantively reduces the 
 impact of concurrence by the introduction of the synchronization and the cooperation sorts. The result shows  a 
-clear elimination of the previously observed oscillation \pref{fig:rwos}. 
+clear elimination of the previously observed oscillation \pref{fig:rwos}. One can see that \emph{uPAR}, \emph{MKP1},
+\emph{IL1 beta} are weel reproduced. \emph{Hes5} and \emph{IL8} are not activated. This result can be observed when the activation
+signal has not been able to propagate through the network due to the random and concurrency.
 
 
 \begin{figure*}[!t]
