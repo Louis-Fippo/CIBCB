@@ -32,7 +32,7 @@ modeling at small-scale the system and then on refining or improving it through 
 some data points, such as methods based on differential equations \cite{tyson2003sniffers,batt2005validation,mobashir2012simulated}, 
 (b) integrate in an efficient and complete fashion large-scale models
 and high-throughput data regardless from the system dynamics \cite{guziolowski2013exhaustively,mitsos2009identifying}, or 
-(c) fit dynamical data to middle-scale networks using an sampling of the space of behaviors stochastic approaches, and
+(c) fit dynamical data to middle-scale networks using an stochastic sampling of the space of behaviors and
 therefore without guarantee on finding global optima \cite{macnamara2012state}. Therefore, with this
 work we intend to fill the gaps between the previously cited methodologies and converge to a more
 realistic model of biological behavior.
@@ -45,18 +45,18 @@ realistic model of biological behavior.
 %les grandes lignes de cette justification sont les suivantes: formalisme très expressif pour les BRN, simulation concurente 
 % provenant de l'algèbre des processus, abstraction permettant de faire de analyse statiques de certaines propriétés. 
 
-For modeling and analyzing stochastic and concurent biological systems, many formalisms have been introduced, such as 
-stochastic Petri Nets which is a suitable approach suitable for the representation of parallel systems \cite{molloy1982performance}. 
+For modeling and analyzing stochastic and concurent biological systems many formalisms have been introduced such as 
+stochastic Petri Nets which is a suitable approach for the representation of parallel systems \cite{molloy1982performance}. 
 They have been successfully and systematically applied in many areas, and the specification Petri Nets
 allows an accurate modeling of a wide range of systems including biological systems \cite{heiner2008petri}. The major 
 problem of Stochastic Petri Nets is that they do not generally lead to compact models. In addition,
 they do not provide results to deal with the state space explosion and are thus generally computationally
 expensive. Another approach is Stochastic pi-calculus introduced by \cite{priami1995stochastic} and used in 
-\cite{maurin2009modeling} for the modeling of biological systems. Stochastic pi-calculus have a good
-expressivity and are well adapted for the use of compositionnal approach.
+\cite{maurin2009modeling} for the modeling of biological systems. Stochastic pi-calculus has a good
+expressivity and is well adapted for the use of compositionnal approach.
 
 %TODO
-For modeling and analyzing the biological system we rely on a stochastic pi-calculus formalism which is the Process Hitting (PH) framework \cite{PMR10-TCSB}, 
+For modeling and analyzing the biological system we rely on a Stochastic pi-calculus formalism which is the Process Hitting (PH) framework \cite{PMR10-TCSB}, 
 since it is especially useful for studying systems composed of biochemical interactions, and provides
 stochastic simulation as well as efficient static methods to model dynamical properties of the system.
 The PH framework uses qualitative and discrete information of the system, without requiring enormous parameter estimation tasks
@@ -77,8 +77,7 @@ The main  results of this work are: first, we built an interaction graph linking
 E-cadherin (Calcium sensitive protein), to genes present in our time-series data and to key cellular processes for our case study, such as 
 keratinocyte-differentiation and cellular-proliferation.  This graph was automatically extracted from PID. Second, we propose an automatic                                     %ici il manque une reference.
 transformation of selected known biological patterns present in  PID in order to generate PH modules;
- adding necessary constraints to the PH model to avoid oscillations. Additionally,                                                 %etre sur que c'est oscillation
-we added necessary constraints to the PH model to avoid biologically incoherent dynamical behaviors.  
+ adding necessary constraints to the PH model to avoid oscillations.  
 Third, we propose a way of estimating temporal and stochastic parameters from time-series expression data to 
 model the measured genes.  These parameters are used for the stochastic simulation of the model.  Finally, 
 we discretized the experimental data to allow the comparison with simulation results for the above mentioned case 
